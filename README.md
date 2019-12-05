@@ -8,13 +8,12 @@
 4. content 邮件正文
 5. token 对象　
 
-　 1. address smtp 服务器地址
+## token object 
 
-   2. port smtp 服务器端口, 一般为25
-
-   3. userName smtp 服务器的用户名
-
-   4. password smtp 服务器的密码　
+1. address smtp 服务器地址
+2. port smtp 服务器端口, 一般为25
+3. userName smtp 服务器的用户名
+4. password smtp 服务器的密码　
 
 ## 测试
 

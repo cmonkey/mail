@@ -85,3 +85,7 @@ class Smtp {
     }
   }
 }
+
+object Smtp{
+  def apply(): Smtp = new Smtp()
+}

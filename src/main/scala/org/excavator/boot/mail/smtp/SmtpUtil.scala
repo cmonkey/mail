@@ -1,4 +1,4 @@
-package org.excavator.boot.smtp
+package org.excavator.boot.mail.smtp
 
 import java.io.{BufferedReader, InputStreamReader, PrintWriter}
 import java.net.Socket

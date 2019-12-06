@@ -1,4 +1,4 @@
-package org.excavator.boot.mail.smtp
+package org.excavator.boot.mail.entity
 
 import java.util.Base64
 

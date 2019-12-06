@@ -1,6 +1,7 @@
 package org.excavator.boot.mail.smtp.test
 
-import org.excavator.boot.mail.smtp.{SmtpUtil, Token}
+import org.excavator.boot.mail.entity.Token
+import org.excavator.boot.mail.smtp.{SmtpUtil}
 import org.junit.jupiter.api.{DisplayName, Test}
 
 class SmtpUtilTests {

@@ -4,6 +4,7 @@ import java.io.{BufferedReader, InputStreamReader, PrintWriter}
 import java.net.Socket
 import java.util.concurrent.atomic.AtomicBoolean
 
+import org.excavator.boot.mail.entity.Token
 import org.slf4j.LoggerFactory
 
 class SmtpUtil {

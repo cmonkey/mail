@@ -11,7 +11,7 @@
     <relativePath/>
   </parent>
 
-  <artifactId>org.excavator.boot.mail</artifactId>
+  <artifactId>mail</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>mail</name>

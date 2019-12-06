@@ -5,6 +5,7 @@ import java.net.Socket
 import java.util
 import java.util.StringTokenizer
 import java.util.concurrent.atomic.AtomicBoolean
+import java.util.function.Consumer
 
 import com.google.common.collect.Lists
 import org.apache.commons.collections4.CollectionUtils
@@ -80,6 +81,11 @@ class Pop3Util {
       }
     }
     mailElements
+  }
+
+  def getSubect(printWriter: PrintWriter,bufferedReader: BufferedReader, num: Int, consumer: Consumer[BufferedReader]) = {
+    printWriter.println("top " + num)
+    consumer.accept(bufferedReader)
   }
 }
 

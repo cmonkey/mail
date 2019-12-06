@@ -1,5 +1,3 @@
 package org.excavator.boot.mail.entity
 
-class MailElemnt {
-
-}
+case class MailElemnt(num: Int, messageSize: Int)

@@ -79,7 +79,22 @@ class Pop3Util {
               }
             }
           }
+          // parse mail subject
           getSubject(printWriter, bufferedReader, num , subjectConsumer)
+
+          val contentConsumer: Consumer[BufferedReader] = (bufferedReader) => {
+            val loop = new AtomicBoolean(true)
+            while(loop.get()){
+              val contentLine = bufferedReader.readLine()
+              if(StringUtils.isNotBlank(contentLine)){
+                logger.info("content by num [{}] line = [{}]", num, contentLine)
+              }else{
+                loop.set(false)
+              }
+            }
+          }
+          // parse mail content
+          getContent(printWriter, bufferedReader, num, contentConsumer)
         })
       }
 

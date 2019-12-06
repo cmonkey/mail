@@ -138,6 +138,11 @@ class Pop3Util {
     printWriter.println("top " + num + " 0")
     consumer.accept(bufferedReader)
   }
+
+  def getContent(printWriter: PrintWriter, bufferedReader: BufferedReader, num: Int, consumer: Consumer[BufferedReader]) = {
+    printWriter.println("retr " + num)
+    consumer.accept(bufferedReader)
+  }
 }
 
 object Pop3Util{

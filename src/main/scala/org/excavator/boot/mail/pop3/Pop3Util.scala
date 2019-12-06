@@ -21,6 +21,11 @@ class Pop3Util {
       printWriter = new PrintWriter(socket.getOutputStream, true)
       bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream))
 
+      printWriter.println("user " + token.userName)
+      printWriter.println("pass " + token.password)
+
+      logger.info("auth login [{}]", bufferedReader.readLine())
+
     }finally{
       bufferedReader.close()
       printWriter.close()

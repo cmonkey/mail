@@ -1,15 +1,16 @@
 package org.excavator.boot.mail.pop3
 
-import java.io.{BufferedInputStream, BufferedReader, InputStreamReader, PrintWriter}
+import java.io.{BufferedReader, InputStreamReader, PrintWriter}
 import java.net.Socket
+import java.util.StringTokenizer
+import java.util.concurrent.atomic.AtomicBoolean
 
-import org.excavator.boot.mail.entity.Token
 import org.slf4j.LoggerFactory
 
 class Pop3Util {
   val logger = LoggerFactory.getLogger(classOf[Pop3Util])
 
-  def retriverMail(token: Token) = {
+  def retriverMail(pop3Address: String, port: Int, userName:String, password: String) = {
 
     var socket: Socket = null
     var printWriter: PrintWriter = null
@@ -17,14 +18,40 @@ class Pop3Util {
 
     try{
 
-      socket = new Socket(token.address, token.port)
+      socket = new Socket(pop3Address, port)
       printWriter = new PrintWriter(socket.getOutputStream, true)
       bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream))
 
-      printWriter.println("user " + token.userName)
-      printWriter.println("pass " + token.password)
+      // step 1 auth login
+      printWriter.println("user " + userName)
+      printWriter.println("pass " + password)
 
       logger.info("auth login [{}]", bufferedReader.readLine())
+
+      // step 2 stat
+      printWriter.println("STAT")
+      logger.info("stat info = [{}]", bufferedReader.readLine())
+
+      printWriter.println("list")
+
+      val loop = new AtomicBoolean(true)
+      while(loop.get()){
+        val elem = bufferedReader.readLine()
+        if(null != elem){
+          if(!"+OK".equals(elem.substring(0, 3))) {
+            val stringTokenizer = new StringTokenizer(elem)
+            val num = Integer.parseInt(stringTokenizer.nextToken())
+            val messageSize = Integer.parseInt(stringTokenizer.nextToken())
+            logger.info("list info = [{}] by num = [{}] messageSize = [{}]", Array(elem, num, messageSize))
+          }else{
+            logger.info("list info = [{}]", elem)
+          }
+        }else if (".".equals(elem)){
+          loop.set(false)
+        }else{
+          loop.set(false)
+        }
+      }
 
     }finally{
       bufferedReader.close()
